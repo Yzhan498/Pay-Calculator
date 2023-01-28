@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pay Calculator',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -56,9 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
   double tax = 0;
 
   final TextEditingController numberHoursController =
-      TextEditingController(text: '0');
+  TextEditingController(text: 'Number of hours');
   final TextEditingController rateCounterController =
-      TextEditingController(text: "0");
+  TextEditingController(text: "Hourly rate");
   void _increment() {
     setState(() {
       hourCounter = double.parse(numberHoursController.text);
@@ -93,59 +94,152 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Container(
-          margin: const EdgeInsets.fromLTRB(0, 40, 0, 30),
-          height: 800,
-          color: Colors.black26,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              ),
-              TextField(
-                controller: numberHoursController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Number of hours',
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              ),
-              TextField(
-                controller: rateCounterController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Hourly rate',
-                ),
-              ),
-              ElevatedButton(
-                onPressed: _increment,
-                child: const Text(
-                  'Calculate',
-                  style: TextStyle(color: Colors.black),
-                  textScaleFactor: 2,
-                ),
-              ),
-              const SizedBox(width: 56),
-              const Text('Report:'),
-              Text('regular pay: $regularPay'),
-              Text('overtime pay: $overtimePay'),
-              Text('Total pay: $totalPay'),
-              Text('Tax $regularPay'),
-              
-                child: Column(
-                  Text(
-                  "Yingda Zhang 301275707",
-                  style: TextStyle(fontSize: 35, backgroundColor: Color.fromARGB(255, 73, 65, 65)),
-                ),
-                ),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              color: Colors.black26,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: numberHoursController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            hintText: 'Number of hours',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: rateCounterController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            //border: OutlineInputBorder(),
+                            fillColor: Colors.white,
 
-            ],
-          ),
+                            hintText: 'Hourly rate',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: _increment,
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(250, 50),
+                    ),
+                    child: const Text(
+                      'Calculate',
+                      style: TextStyle(color: Colors.black),
+                      textScaleFactor: 1.5,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(32),
+                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          /*1*/
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Report:',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                              ),
+                              Text(
+                                'regular pay: $regularPay',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                'overtime pay: $overtimePay',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                'Total pay: $totalPay',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                'Tax $regularPay',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(32),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              color: Colors.black45,
+              child: Row(
+                children: [
+                  Expanded(
+                    /*1*/
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        /*2*/
+                        Container(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: const Text(
+                            'Yingda Zhang',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.white),
+                          ),
+                        ),
+                        const Text(
+                          '301275707',
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
